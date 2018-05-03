@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Zhiyu Wang.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -52,6 +52,32 @@ def draw_upside_down_wall(rectangle, n, window):
     # TODO: 2. Implement and test this function.
     #     Some tests are already written for you (above).
     # ------------------------------------------------------------------
+    original_corner1_x = rectangle.corner_1.x
+    original_corner2_x = rectangle.corner_2.x
+    original_corner1_y = rectangle.corner_1.y
+    original_corner2_y = rectangle.corner_2.y
+    dx = original_corner1_x - original_corner2_x
+    dy = original_corner2_y - original_corner1_y
+
+    x1 = original_corner1_x
+    x2 = original_corner2_x
+    y1 = original_corner1_y
+    y2 = original_corner2_y
+
+    Corner1 = rg.Point(x1, y1)
+    Corner2 = rg.Point(x2, y2)
+
+    for k in range(1,n+1):
+        for j in range(k):
+            new_rectangle = rg.Rectangle(Corner1,Corner2)
+            new_rectangle.attach_to(window)
+            window.render(.1)
+            Corner1.x = Corner1.x + dx
+            Corner2.x = Corner2.x + dx
+        Corner1.x = original_corner1_x - (dx / 2)*k
+        Corner2.x = original_corner2_x - (dx / 2)*k
+        Corner1.y = Corner1.y - dy
+        Corner2.y = Corner2.y - dy
 
 
 # ----------------------------------------------------------------------
